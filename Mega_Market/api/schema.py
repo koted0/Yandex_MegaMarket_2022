@@ -10,6 +10,9 @@ class ShopUnitType(str, Enum):
     offer = "OFFER"
     category = "CATEGORY",
 
+    class Config:
+        orm_mode = True
+
 
 class ShopUnitImport(BaseModel):
     id: UUID
@@ -18,12 +21,19 @@ class ShopUnitImport(BaseModel):
     type: ShopUnitType
     price: Optional[int]
 
+    class Config:
+        orm_mode = True
+
 
 class ShopUnitImportRequest(BaseModel):
     items: List[ShopUnitImport]
     updateDate: datetime
 
+    class Config:
+        orm_mode = True
+
 
 class ShopUnit(ShopUnitImport):
     date: Optional[datetime]
     children: Optional[List["ShopUnit"]]
+

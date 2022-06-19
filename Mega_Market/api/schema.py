@@ -10,9 +10,6 @@ class ShopUnitType(str, Enum):
     offer = "OFFER"
     category = "CATEGORY",
 
-    class Config:
-        orm_mode = True
-
 
 class ShopUnitImport(BaseModel):
     id: UUID
@@ -36,4 +33,9 @@ class ShopUnitImportRequest(BaseModel):
 class ShopUnit(ShopUnitImport):
     date: Optional[datetime]
     children: Optional[List["ShopUnit"]]
+
+    class Config:
+        json_encoders = {
+            datetime: lambda v: v.isoformat().replace('+00:00', 'Z'),
+        }
 

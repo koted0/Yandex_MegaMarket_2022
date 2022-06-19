@@ -7,6 +7,7 @@ from . import schema, model, crud
 
 app = FastAPI()
 
+
 model.Base.metadata.create_all(bind=engine)
 
 
@@ -20,7 +21,7 @@ def get_db():
 
 @app.post('/imports')
 def import_shop_unit(shop_unit_request: schema.ShopUnitImportRequest, db: Session = Depends(get_db)):
-    return crud.post_shop_unit(shop_unit_request, db)
+    crud.post_shop_unit(shop_unit_request, db)
 
 
 @app.delete('/delete/{shop_unit_id}')

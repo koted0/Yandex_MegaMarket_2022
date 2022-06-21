@@ -18,14 +18,8 @@ class ShopUnit(Base):
     price = Column(Integer)
     children = relationship(
         "ShopUnit",
-        # cascade deletions
         cascade="all, delete-orphan",
-        # many to one + adjacency list - remote_side
-        # is required to reference the 'remote'
-        # column in the join condition.
         backref=backref("parent", remote_side=id),
-        # children will be represented as a dictionary
-        # on the "name" attribute.
         collection_class=attribute_mapped_collection("name"),
     )
 
@@ -37,4 +31,11 @@ class ShopUnit(Base):
         self.date = date
         self.type = type
 
+
+class Statistics(Base):
+    __tablename__ = 'statistics'
+
+    id = Column(UUID(as_uuid=True), ForeignKey('shop_unit.id'), primary_key=True)
+    price = Column(Integer)
+    date = Column(DateTime, nullable=False, primary_key=True)
 

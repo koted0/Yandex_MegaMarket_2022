@@ -35,7 +35,7 @@ class ShopUnit(Base):
 class Statistics(Base):
     __tablename__ = 'statistics'
 
-    id = Column(UUID(as_uuid=True), ForeignKey('shop_unit.id'), primary_key=True)
+    id = Column(UUID(as_uuid=True), ForeignKey('shop_unit.id', ondelete='cascade'), primary_key=True)
     price = Column(Integer)
     date = Column(DateTime, nullable=False, primary_key=True)
 

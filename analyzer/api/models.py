@@ -3,7 +3,7 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.orm.collections import attribute_mapped_collection
 
-from database import Base
+from .database import Base
 import uuid
 
 

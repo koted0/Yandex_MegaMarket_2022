@@ -2,7 +2,7 @@ from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from analyzer.api.database import SessionLocal, engine
 from uuid import UUID
-import schemas, models, crud, shop_service
+from . import schemas, models, crud, shop_service
 from datetime import datetime
 from fastapi.encoders import jsonable_encoder
 from fastapi.exceptions import RequestValidationError

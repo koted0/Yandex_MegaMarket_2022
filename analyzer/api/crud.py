@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 from pytz import UTC
 from sqlalchemy import distinct
 
-import schemas, models, shop_service, statistics_service
+from . import schemas, models, shop_service, statistics_service
 from uuid import UUID
 from sqlalchemy.orm import Session
 

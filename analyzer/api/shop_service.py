@@ -4,7 +4,7 @@ from uuid import UUID
 
 import pytz
 from sqlalchemy.orm import Session
-import models, schemas
+from . import models, schemas
 
 
 def find_unit(unit_id: UUID, db: Session):

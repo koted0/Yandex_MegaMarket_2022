@@ -3,7 +3,7 @@ from uuid import UUID
 from sqlalchemy.orm import Session
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy import distinct
-import models, schemas
+from . import models, schemas
 
 
 def post_statistics_to_db(item_id: UUID, date: datetime, price: float, db: Session):

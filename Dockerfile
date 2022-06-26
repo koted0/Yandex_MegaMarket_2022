@@ -16,6 +16,6 @@ COPY --from=builder /usr/share/python3/app /usr/share/python3/app
 
 RUN ln -snf /usr/share/python3/app/bin/analyzer-* /usr/local/bin/
 
-ENV PORT 8080
+ENV analyzer_port 8080
 
 CMD ["analyzer-api"]

@@ -1,0 +1,21 @@
+Metadata-Version: 2.1
+Name: analyzer
+Version: 0.0.1
+Summary: Сервис с REST API, для сравнения цен, аналогичный сервису Яндекс Товары
+Home-page: https://github.com/KoTeD0/Yandex_MegaMarket_2022
+Author: Atayev Rejep
+Author-email: darkest.jerry@gmail.com
+License: MIT
+Platform: all
+Classifier: Intended Audience :: Developers
+Classifier: Natural Language :: Russian
+Classifier: Operating System :: Windows
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Requires-Python: >=3.10
+License-File: LICENSE
+
+UNKNOWN
+

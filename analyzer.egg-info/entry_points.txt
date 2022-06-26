@@ -1,0 +1,4 @@
+[console_scripts]
+analyzer-api = analyzer.api.__main__:main
+analyzer-db = analyzer.db.__main__:main
+

@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   description: "Вступительное задание в Летнюю Школу Бэкенд Разработки Яндекса 2022"
-  title: Mega_Market Open API
+  title: analyzer Open API
   version: "1.0"
 paths:
   /imports:

@@ -1,8 +1,9 @@
 from datetime import datetime
 from enum import Enum
-from typing import List, Optional
+from typing import List, Optional, Any
 from uuid import UUID
 
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
 
@@ -39,3 +40,31 @@ class ShopUnit(ShopUnitImport):
             datetime: lambda v: v.isoformat().replace('+00:00', 'Z'),
         }
 
+
+class ShopUnitStatisticUnit(BaseModel):
+    id: UUID
+    name: str
+    parentId: Optional[UUID]
+    type: ShopUnitType
+    price: Optional[int]
+    date: datetime
+
+    class Config:
+        orm_mode = True
+
+
+class ShopUnitStatisticResponse(BaseModel):
+    items: List[ShopUnitStatisticUnit]
+
+    class Config:
+        orm_mode = True
+
+
+class Error(BaseModel):
+    code: int
+    message: str
+
+
+class NoItemsError(JSONResponse):
+    def __init__(self):
+        super().__init__(status_code=404, content={'code': 404, 'message': 'Item not found'})

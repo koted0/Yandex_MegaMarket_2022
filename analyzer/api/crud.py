@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 from pytz import UTC
 from sqlalchemy import distinct
 
-from . import schemas, models, shop_service, statistics_service
+import schemas, models, shop_service, statistics_service
 from uuid import UUID
 from sqlalchemy.orm import Session
 
@@ -45,7 +45,7 @@ def post_item_to_db(shop_unit_request: schemas.ShopUnitImportRequest, db: Sessio
         _update_shop_unit(unit.id, shop_unit_request.updateDate, db)
 
 
-# main delete method
+# main delete methodf
 def delete_item_from_db(shop_unit_id: UUID, db: Session):
     db.delete(shop_service.find_unit(shop_unit_id, db))
     db.commit()
@@ -60,9 +60,25 @@ def get_item_from_db(shop_unit_id: UUID, db: Session):
 # main sales method
 def get_sales_from_db(date: datetime, db: Session):
     """return all changed price row from statistics table in last 24 hours"""
-    time_24_hours_ago = date - timedelta(hours=24)
-    sales_in_24_hour = db.query(distinct(models.Statistics.id))\
-        .filter(models.Statistics.date.between(time_24_hours_ago, date)).as_scalar()
+    sales_in_24_hour = statistics_service.\
+        find_statistic_in_24_hours((date - timedelta(hours=24)), date, db)
 
     # return sales_in_24_hour
-    return db.query(models.ShopUnit).filter(models.ShopUnit.id.in_(sales_in_24_hour)).all()
+    sales = {
+        'items': db.query(models.ShopUnit).filter(models.ShopUnit.id.in_(sales_in_24_hour)).all()
+    }
+
+    return sales
+
+
+def get_statistic(shop_unit_id: UUID, date_start: datetime, date_end: datetime, db: Session):
+    statistic_in_interval = statistics_service.find_in_interval(shop_unit_id, date_start, date_end, db)
+    shop_unit = shop_service.find_unit(shop_unit_id, db)
+    statistic_response = {
+        'items': []
+    }
+    for item in statistic_in_interval:
+        response = statistics_service.map_to_statistics(item, shop_unit)
+        statistic_response['items'].append(response)
+
+    return statistic_response

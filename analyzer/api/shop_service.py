@@ -4,7 +4,7 @@ from uuid import UUID
 
 import pytz
 from sqlalchemy.orm import Session
-from . import models, schemas
+import models, schemas
 
 
 def find_unit(unit_id: UUID, db: Session):
@@ -60,3 +60,4 @@ def find_avg(shop_unit_id: UUID, db: Session):
                       'FROM category_path AS cp JOIN shop_unit AS c '
                       'ON cp.id = c."parentId") '
                       'SELECT avg(price) FROM category_path WHERE type != \'CATEGORY\' ').scalar()
+
